@@ -1,0 +1,7 @@
+version: '3'
+services:
+  library-db:
+    image: postgres:alpine
+    env_file:
+      - postgres.env
+
