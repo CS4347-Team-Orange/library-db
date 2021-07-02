@@ -1,28 +1,17 @@
-# CS4347 Project
+# Library Database
 
-We're building a library catalog on Postgres.  The application must be written in java.
+## Running locally
 
-# Features
+`bash start.sh`
 
-* Inventory Management for books
-* User Management for authorized users of the library
-* Fine management - If a checked out book is overdue, we can assess and track fines for the users
+* Builds the container
+* Starts the container with a blank volume
+* Container will apply `schema.sql` to the `library` db
+* Container will apply `data.sql` to the `library` db
+* Container will make postgres server ready for connections.
 
-# Requirements
+## Credentials
 
-* Use a GUI
-* Use forms to manipulate data in the DB
-
-# Run the project
-
-Install [docker-compose](https://docs.docker.com/compose/install/)
-
-Run the postgres server locally: `docker-compose up`
-
-**WARNING**: The default configuration has no persistence.  Data will be destroyed when the container is stopped or removed.  
-
-# The stack (Tentative)
-
-* DB: Postgres 
-* Backend API: Java + Spring or Node + Express? or Python + Django or Python + Flask?
-* Frontend: ?? Vue?  React?
+Username: library
+Password: library
+dbname: library

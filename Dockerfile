@@ -1,3 +1,6 @@
 FROM postgres:alpine
-COPY schema.sql /docker-entrypoint-initdb.d/98-schema.sql
-COPY data.sql /docker-entrypoint-initdb.d/99-data.sql
+RUN mkdir -p /tmp/psql_data
+COPY schema.sql /tmp/psql_data/
+COPY data.sql /tmp/psql_data/
+COPY scripts/init_docker_postgres.sh /docker-entrypoint-initdb.d/
+EXPOSE 5432

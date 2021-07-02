@@ -1,3 +1,1 @@
-/*
-We can generate code for some test data to be inserted here
-*/
+INSERT INTO test VALUES (1)
