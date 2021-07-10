@@ -19,7 +19,7 @@ Username: library
 Password: library
 dbname: library
 
-Connect with the psql cli to verify or troubleshoot: `PGPASSWORD=library psql -h 127.0.0.1 -u library -p library`
+Connect with the psql cli to verify or troubleshoot: `PGPASSWORD=library psql -h 127.0.0.1 -U library library`
 
 ## Blank volume
 
