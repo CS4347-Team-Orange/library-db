@@ -15,10 +15,10 @@ Building the container requires node 14.
 ```
 nvm install lts/fermium
 nvm alias default lts/fermium
+bash start.sh
 ```
 
-
-## Running locally
+## What does start.sh do?
 
 * Runs a lint against the SQL files to make sure syntax is correct.
 * Builds the container
