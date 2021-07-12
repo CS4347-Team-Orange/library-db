@@ -1,5 +1,23 @@
 # Library Database
 
+## Local Quickstart
+
+Ensure you have [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed
+
+```
+docker-compose up
+```
+
+## Environment setup (dev)
+
+Building the container requires node 14.  
+
+```
+nvm install lts/fermium
+nvm alias default lts/fermium
+```
+
+
 ## Running locally
 
 * Runs a lint against the SQL files to make sure syntax is correct.

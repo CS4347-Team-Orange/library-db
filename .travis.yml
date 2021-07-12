@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - 14
+branches:
+    only:
+        - master
+script:
+      - echo "Logging in as ${DOCKER_USER}"
+      - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+      - bash travis.sh

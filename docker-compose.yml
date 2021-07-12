@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    image: library/db
+    image: alex4108/library-db
     env_file:
       - postgres.env
     ports:
