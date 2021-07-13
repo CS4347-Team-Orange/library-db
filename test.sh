@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Running tests..."
+
 PROJECT_NAME="library-db" # The project's name
 
 # Do any testing here
@@ -17,3 +19,4 @@ for f in ${files}; do
 	fi
 done
 
+echo "Tests passed!"
