@@ -1,5 +1,7 @@
 # Library Database
 
+[![Build Status](https://travis-ci.com/CS4347-Team-Orange/library-db.svg?token=MyN3vGLjp8SzdckebFqZ&branch=master)](https://travis-ci.com/CS4347-Team-Orange/library-db)
+
 ## Local Quickstart
 
 Ensure you have [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) installed
