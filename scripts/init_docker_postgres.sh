@@ -6,6 +6,11 @@
 DATABASE_NAME="library"
 DB_DUMP_LOCATIONS="/tmp/psql_data/schema.sql /tmp/psql_data/data.sql"
 
+echo "*** Activating PostgreSQL uuid plugin ***"
+PGPASSWORD=library psql -U library "$DATABASE_NAME" <<-EOSQL
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+EOSQL
+
 echo "*** CREATING DATABASE ***"
 
 # clean sql_dump - because I want to have a one-line command
