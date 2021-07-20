@@ -2,8 +2,14 @@ CREATE TABLE IF NOT EXISTS test (
     id INT PRIMARY KEY
 );
 CREATE TABLE IF NOT EXISTS BOOK (
-    isbn bigint PRIMARY KEY,
-    title TEXT
+    book_id TEXT PRIMARY KEY DEFAULT uuid_generate_v1(),
+    isbn10 text UNIQUE,
+    isbn13 text UNIQUE,
+    title TEXT,
+    author TEXT,
+    cover TEXT,
+    publisher TEXT,
+    pages INT
 );
 CREATE TABLE IF NOT EXISTS AUTHORS (
     author_id SERIAL PRIMARY KEY,
@@ -11,14 +17,11 @@ CREATE TABLE IF NOT EXISTS AUTHORS (
 );
 CREATE TABLE IF NOT EXISTS BOOK_AUTHORS (
     author_id SERIAL,
-    CONSTRAINT book_author_authorid
-    FOREIGN KEY(author_id)
-    REFERENCES AUTHORS(author_id),
-    isbn bigint,
-    PRIMARY KEY(author_id, isbn),
-    CONSTRAINT book_author_isbn
-      FOREIGN KEY(isbn)
-      REFERENCES BOOK(isbn)
+    book_id text,
+    PRIMARY KEY(author_id, book_id),
+    CONSTRAINT book_author_book_id
+      FOREIGN KEY(book_id)
+      REFERENCES BOOK(book_id)
       ON DELETE SET NULL
 );
 
@@ -35,10 +38,10 @@ CREATE TABLE IF NOT EXISTS BORROWER (
 );
 CREATE TABLE IF NOT EXISTS BOOK_LOANS (
     loan_id UUID PRIMARY KEY,
-    isbn bigint,
-    CONSTRAINT book_loan_isbn
-    FOREIGN KEY(isbn)
-    REFERENCES BOOK(isbn),
+    book_id text,
+    CONSTRAINT book_loan_book_id
+    FOREIGN KEY(book_id)
+    REFERENCES BOOK(book_id),
     card_id TEXT,
     CONSTRAINT borrower_card_id
     FOREIGN KEY(card_id)
