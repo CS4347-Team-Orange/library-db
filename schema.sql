@@ -24,10 +24,14 @@ CREATE TABLE IF NOT EXISTS BOOK_AUTHORS (
 
 CREATE TABLE IF NOT EXISTS BORROWER (
     card_id TEXT PRIMARY KEY DEFAULT uuid_generate_v1(),
-    ssn BIGINT UNIQUE,
-    bname TEXT,
-    address TEXT,
-    phone TEXT
+	ssn TEXT UNIQUE,
+	first_name TEXT,
+	last_name TEXT,
+	email TEXT,
+	address TEXT,
+	city TEXT,
+	state TEXT,
+	phone TEXT
 );
 CREATE TABLE IF NOT EXISTS BOOK_LOANS (
     loan_id UUID PRIMARY KEY,
