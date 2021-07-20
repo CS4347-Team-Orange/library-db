@@ -4,5 +4,7 @@ services:
     image: alex4108/library-db
     env_file:
       - postgres.env
+    environment: 
+      - PGDATA=/tmp/pgdata
     ports:
       - 5432:5432

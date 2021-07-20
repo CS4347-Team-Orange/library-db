@@ -2,5 +2,5 @@
 set -e
 
 bash build.sh
-bash test.sh
+# bash test.sh
 docker-compose up --renew-anon-volumes

@@ -8,7 +8,7 @@ if [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "master" ]]; 
 fi
 
 bash build.sh
-bash test.sh
+# bash test.sh
 
 if [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "master" ]]; then
     docker push alex4108/library-db

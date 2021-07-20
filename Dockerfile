@@ -1,4 +1,5 @@
 FROM postgres:alpine
+RUN rm -rf /tmp/pgdata
 RUN mkdir -p /tmp/psql_data
 COPY schema.sql /tmp/psql_data/
 COPY data.sql /tmp/psql_data/
