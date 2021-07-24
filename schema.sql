@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS BORROWER (
 	phone TEXT
 );
 CREATE TABLE IF NOT EXISTS BOOK_LOANS (
-    loan_id UUID PRIMARY KEY,
+    loan_id TEXT PRIMARY KEY DEFAULT uuid_generate_v1(),
     book_id text,
     CONSTRAINT book_loan_book_id
     FOREIGN KEY(book_id)
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS BOOK_LOANS (
     date_in date default NULL
 );
 CREATE TABLE IF NOT EXISTS FINES (
-    loan_id UUID PRIMARY KEY,
+    loan_id TEXT PRIMARY KEY DEFAULT uuid_generate_v1(),
     fine_amt decimal,
     paid boolean
 );
