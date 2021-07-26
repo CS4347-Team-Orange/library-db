@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS BOOK_LOANS (
     CONSTRAINT borrower_card_id
     FOREIGN KEY(card_id)
     REFERENCES BORROWER(card_id),
-    date_out date not null default CURRENT_DATE,
-    due_date date not null default CURRENT_DATE + INTERVAL '14 days',
+    date_out date NOT NULL DEFAULT CURRENT_DATE,
+    due_date date NOT NULL DEFAULT CURRENT_DATE + INTERVAL '14 days',
     date_in date default NULL
 );
 CREATE TABLE IF NOT EXISTS FINES (
