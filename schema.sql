@@ -51,7 +51,10 @@ CREATE TABLE IF NOT EXISTS BOOK_LOANS (
     date_in date default NULL
 );
 CREATE TABLE IF NOT EXISTS FINES (
-    loan_id TEXT PRIMARY KEY DEFAULT uuid_generate_v1(),
+    loan_id TEXT PRIMARY KEY,
+    CONSTRAINT fine_loan_id
+    FOREIGN KEY(loan_id)
+    REFERENCES BOOK_LOANS(loan_id),
     fine_amt decimal,
     paid boolean
 );
