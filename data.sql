@@ -8,6 +8,7 @@ FROM '/tmp/psql_data/borrowers.csv'
 DELIMITER ','
 CSV HEADER;
 
+--- COPY book_author()
 
 -- INSERT INTO BORROWER (
 --         card_id,
