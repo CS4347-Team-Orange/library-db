@@ -12,7 +12,7 @@ docker-compose up
 
 ## Environment setup (dev)
 
-Building the container requires node 14.  
+Building the container requires node 14 as the default nodejs runtime.
 
 ```
 nvm install lts/fermium
