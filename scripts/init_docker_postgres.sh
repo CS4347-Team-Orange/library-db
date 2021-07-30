@@ -23,4 +23,10 @@ for DB_DUMP_LOCATION in ${DB_DUMP_LOCATIONS}; do
 
 done
 
+echo "*** NORMALIZING AUTHORS ***"
+old_pwd=$(pwd)
+cd /tmp/psql_data/
+python3 normalize.py
+cd ${old_pwd}
+
 echo "*** DATABASE CREATED! ***"

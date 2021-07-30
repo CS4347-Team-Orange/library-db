@@ -12,17 +12,20 @@ CREATE TABLE IF NOT EXISTS BOOK (
     pages INT
 );
 CREATE TABLE IF NOT EXISTS AUTHORS (
-    author_id SERIAL PRIMARY KEY,
-    name TEXT
+    author_id TEXT PRIMARY KEY DEFAULT uuid_generate_v1(),
+    name TEXT UNIQUE
 );
 CREATE TABLE IF NOT EXISTS BOOK_AUTHORS (
-    author_id SERIAL,
+    author_id TEXT,
     book_id text,
     PRIMARY KEY(author_id, book_id),
     CONSTRAINT book_author_book_id
       FOREIGN KEY(book_id)
-      REFERENCES BOOK(book_id)
-      ON DELETE SET NULL
+      REFERENCES BOOK(book_id),
+    CONSTRAINT book_author_author_id
+      FOREIGN KEY(author_id)
+      REFERENCES AUTHORS(author_id)
+    
 );
 
 CREATE TABLE IF NOT EXISTS BORROWER (
