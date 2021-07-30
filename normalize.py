@@ -1,9 +1,8 @@
 import csv, pandas
 
-columnName = ['author']
-author_data = pandas.read_csv('books.csv', names=columnName)
-csv_to_list = []
-csv_to_list.append(author_data)
-print(csv_to_list)
+tsv_file = open('books.tsv')
+author_data = csv.reader(tsv_file, delimiter="\t")
+for a in author_data:
+	print(a)
 
 
