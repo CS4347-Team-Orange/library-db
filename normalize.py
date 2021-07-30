@@ -68,3 +68,9 @@ for book in booksList:
                     conn.rollback()
 
 print("Finished linking authors to books")
+
+try:   
+    cur.execute("ALTER TABLE BOOK DROP COLUMN author")
+    conn.commit()
+except (psycopg2.errors.UniqueViolation, psycopg2.errors.InFailedSqlTransaction):
+    conn.rollback()
