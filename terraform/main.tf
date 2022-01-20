@@ -110,7 +110,7 @@ resource "aws_ecs_task_definition" "this" {
 }
 
 resource "aws_ecs_service" "main" {
-  name                               = "${local.app_name}-service"
+  name                               = "${local.app_name}"
   cluster                            = nonsensitive(data.tfe_outputs.account.values.ecs_cluster_arn)
   task_definition                    = aws_ecs_task_definition.this.arn
   desired_count                      = 1
