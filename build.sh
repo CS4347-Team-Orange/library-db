@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-set -e # Abort on any error 
+set -euo pipefail 
 
-PROJECT_NAME="db" # Set this to the repo's name
+if [[ "${container_image}" == "" && "${TRAVIS_COMMIT}" == "" ]]; then
+    container_image="alex4108/library-db"
+fi
 
-# Build the container
-docker build -t alex4108/library-${PROJECT_NAME} .
+docker build -t ${container_image} .
 

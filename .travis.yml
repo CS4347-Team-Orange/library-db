@@ -1,5 +1,15 @@
 language: node_js
 node_js:
-  - 14
+- 14
+env:
+  - secure: pGejRDYhEcvWCXJnP9+QqynfiLpa4t5AANj0vtJLZP5L0E1NhBaEigHiJOyMjBBXR6RG6rvX5/EXJBV0R6O0sniuWDf1QEV9EAK6SAbu0EyggJqGN2+V1QOBKMKQx9RqqhhdzM1dCTZF3E8JegyoW06PIUoSSjjgZS+ZqpzFcN/92Pt9s6s3KTE5eHyoU0tkzVF/eY0N+5hjuhKTX2jfNOFDBnEQhplGv5sD454uCnISTQpgBOy++ppIbv4dmNiXhTyIA/OgEvwR5F4mKn8YYJc3zojaxRWu3z4cDyEQxyZxJT79BbDent7sW+nhDmZYDVIGtLGXBWmx8iVWeeu7oAz1M7q0TmDoKg1V90WV1iUUwYqyNn7s+VCHG6KdpEyvHtkhHdVgYR3bdu5fwm8MCqiICvdioFPdG7ZfoBH/ji+lvKAk7jvpKARtYAFauQ6azYZzXa1ofDtPBran8aPVmIci5QmQm4wXJNMHQlv/AK+2/cXXq0upr12F1X8kcrS22ZYZfuVHyCNzWKw3aHOmYIGfr0jSs0EXMpC1Pq3l18SSsvPhyjjGc181yaApP20veeEVNywMJkDp7vBGdac/GKwx8ntPGrs3bxHhD4J+WeyXzuO3AI2ELY5greGN3cqYMaI0eCiIFekcIQsnhOljQyjHIvWJioe2kmUfVwMEZzM=
+  - tf_version=1.1.3
+  - TF_HOST=app.terraform.io
+  - TF_ORG=alex4108
 script:
-      - bash travis.sh
+- export OLDPWD=$(pwd)
+- mkdir -p /tmp/tf-install
+- cd /tmp/tf-install && wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip && unzip terraform_"$tf_version"_linux_amd64.zip && sudo mv terraform /usr/local/bin/
+- cd ${OLDPWD} && rm -rf /tmp/tf-install
+- pip3 install awscli
+- bash travis.sh

@@ -1,0 +1,46 @@
+[
+    {
+      "name": "${name}",
+      "image": "${image}",
+      "essential": true,
+      "cpu": ${cpu},
+      "memory": ${ram},
+      "environment": [
+        {
+            "name": "POSTGRES_USER",
+            "value": "${postgres_user}"
+        },
+        {
+            "name": "POSTGRES_PASSWORD",
+            "value": "${postgres_password}"
+        },
+        {
+          "name": "POSTGRES_DB",
+          "value": "${postgres_database}"
+        },
+        {
+            "name": "PGDATA",
+            "value": "/mnt/efs/"
+        }    
+      ],
+      "mountPoints": { 
+          "containerPath": "/mnt/efs/",
+          "sourceVolume": "${app_name}"
+      },
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-region": "${region}",
+          "awslogs-group": "${app_name}",
+          "awslogs-stream-prefix": "${app_name}"
+        }
+      },
+      "portMappings": [ 
+        { 
+           "containerPort": 5432,
+           "hostPort": 5432,
+           "protocol": "tcp"
+        }
+     ]
+    }
+  ]
