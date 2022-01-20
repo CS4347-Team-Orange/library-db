@@ -7,14 +7,16 @@ env:
   - tf_version=1.1.3
   - TF_HOST=app.terraform.io
   - TF_ORG=alex4108
+  # TF_API_TOKEN
   - secure: eHzHr+tnfRr56gIFtvvIDHN5CZ/P9XihGznjTwDbTkj4HERJIWVRpOcK7sZnrxhEcpZtwA1uRyzVAXBLgY1mr+csDqu0uL6S8HrTK1CsUugWFH+UcZa4MSNZD5RKGNRUhOAPMvkfMJz7SemG7UMtKEHkEMsdg34tCl0tl5GyvGmGk4eENWVgl9rsEKai8nawZZU1z5nfajymsZStB0+qmP0IDGUwBApVH/cjcneLb2sObdk2lRFDURV5DHKwDAVQHVwOYiLcpfYZzmAZF90Zb08hjNZxdbVcQK0U8dA7wDiOV7vuNF+xFIiuqEW1MDymii1PlN01VAj6wsmfglJsA12dcE/V27MyL7Km6e08P1rTifgAJvJ5IR5lS33d7SSNZ+JEnKBnJtgCk/75D0jqQQMFQo88SrRn7dRZ8G4Rbb+5srxwsY9uCddkRwismINtDjQmJ9HJW85wnITYnInqruh/fiVp0IaI7ba5qFd7u5TVkhFrqiKG+qF99NLed63+uo9wjqot8zc/O9Xlmuc4vxQ4aOhPH4Y/zo+orV/ABSP6bKxkiEIkX8XVLnwk6W80payI2VwaWTASiEr03AmgH6uza9jkm/DFBPmbk9Kmoov87gxKWlbeVTGrAXclpS0tKOrOkPSLCHXmOuU2y00h64WFTnVVZ++x3R1A5SXl0b4=
+  # DOCKER_USER
   - secure: pGejRDYhEcvWCXJnP9+QqynfiLpa4t5AANj0vtJLZP5L0E1NhBaEigHiJOyMjBBXR6RG6rvX5/EXJBV0R6O0sniuWDf1QEV9EAK6SAbu0EyggJqGN2+V1QOBKMKQx9RqqhhdzM1dCTZF3E8JegyoW06PIUoSSjjgZS+ZqpzFcN/92Pt9s6s3KTE5eHyoU0tkzVF/eY0N+5hjuhKTX2jfNOFDBnEQhplGv5sD454uCnISTQpgBOy++ppIbv4dmNiXhTyIA/OgEvwR5F4mKn8YYJc3zojaxRWu3z4cDyEQxyZxJT79BbDent7sW+nhDmZYDVIGtLGXBWmx8iVWeeu7oAz1M7q0TmDoKg1V90WV1iUUwYqyNn7s+VCHG6KdpEyvHtkhHdVgYR3bdu5fwm8MCqiICvdioFPdG7ZfoBH/ji+lvKAk7jvpKARtYAFauQ6azYZzXa1ofDtPBran8aPVmIci5QmQm4wXJNMHQlv/AK+2/cXXq0upr12F1X8kcrS22ZYZfuVHyCNzWKw3aHOmYIGfr0jSs0EXMpC1Pq3l18SSsvPhyjjGc181yaApP20veeEVNywMJkDp7vBGdac/GKwx8ntPGrs3bxHhD4J+WeyXzuO3AI2ELY5greGN3cqYMaI0eCiIFekcIQsnhOljQyjHIvWJioe2kmUfVwMEZzM=
+  # DOCKER_PASS
   - secure: qHbF3xS5iOIHCk8w6FjwCsuK3//v8YGavhT/+bLRVsgSt1RQZEjEERtobyBEXcaJngQMhkOYA/UTngUySh6AzTWesGqP2xVA0QnNWqIvlzZE58pfhkqUn8+RIlaL2sO3VFovwXEQydpgpTxR+K9H1hZB8rmBIgU9MFYcDxAOK+4HC/ZyX3z1LYv5BE01VykoXcJ1bScvF2c/1toQdVtc16q/6PxKdDHsUmdU2Z4IdoXFYtf80hNnj+6tnWaqxdgbvAIwJzr8h7YWd+JQRRhOezvxjMglUSekOLaFx27MSlKsIBK8ZdQbF4LPQVY7k2SCoj2E4WDXGMHAonnK5zfwezSKTdHNbF/pQYo+Bgt8HveZnPtkPTupdjV37NL0n/3UfI4svOr7kQYnvMKsiUiZxFltI2WBqOJdulvT8+RrvL75cAiAbMNdSNW9AjmQuFLbo60Q/nQwwjGFvkWGzlIxq+X1lkwwL58xAbc+z6DxkocYOKDUagXl3lnm2391Tr8bUa8dI9yCoX/2VqVCC4ffwzgpWyM0JLHGOAwXR6euldKhkvnVnxAX2Z+DFwHGE2US7d2mBmyWc/keGJlDxaZxnvuS6Xy8IwVldLOCadeYMNWi6G+RR3ZfUhQ/5yppbd5dmSixo3A8K9AdN4gV/X4ZZOIUmKE7rp9vAbXoDr7EF5M=
 script:
 - export OLDPWD=$(pwd)
 - mkdir -p /tmp/tf-install
-- cd /tmp/tf-install && wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip
-  && unzip terraform_"$tf_version"_linux_amd64.zip && sudo mv terraform /usr/local/bin/
+- cd /tmp/tf-install && wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip && unzip terraform_"$tf_version"_linux_amd64.zip && sudo mv terraform /usr/local/bin/
 - cd ${OLDPWD} && rm -rf /tmp/tf-install
 - pip3 install awscli
 - bash travis.sh
