@@ -10,16 +10,10 @@ env:
   - secure: eHzHr+tnfRr56gIFtvvIDHN5CZ/P9XihGznjTwDbTkj4HERJIWVRpOcK7sZnrxhEcpZtwA1uRyzVAXBLgY1mr+csDqu0uL6S8HrTK1CsUugWFH+UcZa4MSNZD5RKGNRUhOAPMvkfMJz7SemG7UMtKEHkEMsdg34tCl0tl5GyvGmGk4eENWVgl9rsEKai8nawZZU1z5nfajymsZStB0+qmP0IDGUwBApVH/cjcneLb2sObdk2lRFDURV5DHKwDAVQHVwOYiLcpfYZzmAZF90Zb08hjNZxdbVcQK0U8dA7wDiOV7vuNF+xFIiuqEW1MDymii1PlN01VAj6wsmfglJsA12dcE/V27MyL7Km6e08P1rTifgAJvJ5IR5lS33d7SSNZ+JEnKBnJtgCk/75D0jqQQMFQo88SrRn7dRZ8G4Rbb+5srxwsY9uCddkRwismINtDjQmJ9HJW85wnITYnInqruh/fiVp0IaI7ba5qFd7u5TVkhFrqiKG+qF99NLed63+uo9wjqot8zc/O9Xlmuc4vxQ4aOhPH4Y/zo+orV/ABSP6bKxkiEIkX8XVLnwk6W80payI2VwaWTASiEr03AmgH6uza9jkm/DFBPmbk9Kmoov87gxKWlbeVTGrAXclpS0tKOrOkPSLCHXmOuU2y00h64WFTnVVZ++x3R1A5SXl0b4=
   - secure: pGejRDYhEcvWCXJnP9+QqynfiLpa4t5AANj0vtJLZP5L0E1NhBaEigHiJOyMjBBXR6RG6rvX5/EXJBV0R6O0sniuWDf1QEV9EAK6SAbu0EyggJqGN2+V1QOBKMKQx9RqqhhdzM1dCTZF3E8JegyoW06PIUoSSjjgZS+ZqpzFcN/92Pt9s6s3KTE5eHyoU0tkzVF/eY0N+5hjuhKTX2jfNOFDBnEQhplGv5sD454uCnISTQpgBOy++ppIbv4dmNiXhTyIA/OgEvwR5F4mKn8YYJc3zojaxRWu3z4cDyEQxyZxJT79BbDent7sW+nhDmZYDVIGtLGXBWmx8iVWeeu7oAz1M7q0TmDoKg1V90WV1iUUwYqyNn7s+VCHG6KdpEyvHtkhHdVgYR3bdu5fwm8MCqiICvdioFPdG7ZfoBH/ji+lvKAk7jvpKARtYAFauQ6azYZzXa1ofDtPBran8aPVmIci5QmQm4wXJNMHQlv/AK+2/cXXq0upr12F1X8kcrS22ZYZfuVHyCNzWKw3aHOmYIGfr0jSs0EXMpC1Pq3l18SSsvPhyjjGc181yaApP20veeEVNywMJkDp7vBGdac/GKwx8ntPGrs3bxHhD4J+WeyXzuO3AI2ELY5greGN3cqYMaI0eCiIFekcIQsnhOljQyjHIvWJioe2kmUfVwMEZzM=
   - secure: vOu8K5cTPJ+iusj33EoZvW1B2S54Jubir3qP5Qhn0PEHl0vLajUgYFA7O2W42jcOWSxB/xPtlyKHq0Bo0s05fn53VwvFjvdbauTqadzwlyckyFfbvW7c7Kt79TVSFc+hcX+VFuGeBaOhmSED4ZUaCHAXwzu1qTiucmYL5eBJuZNOVU+XsFsYVjTgD7+mFn5octiW+VRub4gdF5ucxKH68gGCzumLJG2D2P5yJRRIMM/k1A/8t5+mwb4w6WooJrXRx6QSvYvU33ZRjP1sagOLRjjSsGcY/yTpAj73CHNHsTM1HFP2nZFu6R8hU+jyrxVguSe0oCJtj3jwgFzNyV0DjqEThwL8X12afgk3RkXmZDTMZCzt/XEeCpNOu9TMAiUlrvJoKuTDqyESKrcFWYTqNSUxR1K5kMT+sKeIPJr6Bj0OYnXvWhSaAJ3bUr3nLxsIp0nTaM0dUFDGdx2Es982p8t0RjQlOcO8HlQlYkQ/S2+ze04c9h6W0/4UQpF0UfpUe/KBaI3hM7fK7/oA4HW0HAdyKH+pSKDgNagNUubOOm459EImlaxnd12mv/sqexE2bZnQoEvIsM4vRX87bZMRQG0ab4JmOTi+vxNvZ7j3w5NRUOOwb9ajlQEHa2hio6bhBaMnX9VrcCLKSMi6n2030OOo3Oe9YJBREBbA8x/D630=
-cache:
-  - "$HOME/terraform/.terraform/"
-  - "$HOME/terraform/.terraform.lock.hcl"
 script:
 - export OLDPWD=$(pwd)
 - mkdir -p /tmp/tf-install
 - cd /tmp/tf-install && wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip && unzip terraform_"$tf_version"_linux_amd64.zip && sudo mv terraform /usr/local/bin/
 - cd ${OLDPWD} && rm -rf /tmp/tf-install
-- curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-- unzip awscli-bundle.zip
-- ./awscli-bundle/install -b ~/bin/aws
-- export PATH=~/bin:$PATH
+- pip3 install awscli
 - bash travis.sh
