@@ -1,13 +1,28 @@
 # Terraform
 
-The Terraform projects in this system use [Partial Configuration](https://www.terraform.io/language/settings/backends/remote#using-cli-input) of the Terraform Cloud backend.
+These Terraform modules are configured for use in [Terraform Cloud "TFC"](https://app.terraform.io)
 
-You can run this snippet to initialize Terraform locally.
+You should set the `TF_ORG` appropriately if you're running in your own TFC organization.
+
+# terraform init
+
+The Terraform projects in this system use [Partial Configuration](https://www.terraform.io/language/settings/backends/remote#using-cli-input) of the Terraform Cloud backend.
 
 ```
 cp config.remote.tfbackend.tpl config.remote.tfbackend
 sed -i "s#TF_ORG#alex4108#g" config.remote.tfbackend
-sed -i "s#TF_WORKSPACE#library-${USER}#g" config.remote.tfbackend
+sed -i "s#TF_WORKSPACE#library-db-${USER}#g" config.remote.tfbackend
 sed -i "s#TF_HOST#app.terraform.io#g" config.remote.tfbackend
 terraform init -backend-config="config.remote.tfbackend"
 ```
+
+# terraform plan
+
+```
+echo "stage = \"${USER}\"" > ./${USER}.auto.tfvars
+echo "container_uri = \"registry.hub.docker.com/alex4108/library-db:latest\"" >> ./${USER}.auto.tfvars
+echo "tf_account_workspace = \"library-${USER}\"" >> ./${USER}.auto.tfvars
+echo "tf_org = \"alex4108\"" >> ./${USER}.auto.tfvars
+terraform plan
+```
+

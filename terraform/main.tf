@@ -52,16 +52,17 @@ resource "aws_iam_role_policy_attachment" "ecs_task_policy_attach" {
 
 // Service discovery
 
-resource "aws_service_discovery_public_dns_namespace" "this" {
-  name        = "db.${local.service_discovery_root}"
+resource "aws_service_discovery_private_dns_namespace" "this" {
+  name        = "${local.service_discovery_root}"
   description = "Service Discovery Namespace for ${local.app_name}"
+  vpc         = nonsensitive(data.tfe_outputs.account.values.vpc_id)
 }
 
 resource "aws_service_discovery_service" "this" {
-  name = local.app_name
+  name = "db"
 
   dns_config {
-    namespace_id = aws_service_discovery_public_dns_namespace.this.id
+    namespace_id = aws_service_discovery_private_dns_namespace.this.id
 
     dns_records {
       ttl  = 10
@@ -76,11 +77,20 @@ resource "aws_efs_file_system" "this" {
   creation_token = "${local.app_name}"
 }
 
+resource "aws_efs_mount_target" "alpha" {
+  for_each       = toset(nonsensitive(data.tfe_outputs.account.values.vpc_private_subnets))
+  
+  file_system_id = aws_efs_file_system.this.id
+  subnet_id      = each.value
+  security_groups = [ aws_security_group.efs.id, nonsensitive(data.tfe_outputs.account.values.cluster_security_group_id)]
+}
+
+
 // ECS
 
 resource "aws_ecs_task_definition" "this" {
   network_mode             = "awsvpc"
-  family                   = "service"
+  family                   = local.app_name
   requires_compatibilities = ["FARGATE"]
   cpu                      = local.service_cpu
   memory                   = local.service_ram
@@ -145,7 +155,7 @@ resource "aws_security_group" "this" {
     name                 = "${local.app_name}"
     description          = "Tier security group for ${local.app_name}"
     vpc_id               = nonsensitive(data.tfe_outputs.account.values.vpc_id)
-    
+
     ingress {
         protocol        = "tcp"
         from_port       = 5432
@@ -167,3 +177,41 @@ resource "aws_security_group" "this" {
         cidr_blocks      = ["0.0.0.0/0"]
     }
 }
+
+resource "aws_security_group" "efs" { 
+    name                 = "${local.app_name}-efs"
+    description          = "EFS security group for ${local.app_name}"
+    vpc_id               = nonsensitive(data.tfe_outputs.account.values.vpc_id)
+
+    ingress {
+        protocol        = "-1"
+        from_port       = 0
+        to_port         = 0
+        security_groups = [ 
+          nonsensitive(data.tfe_outputs.account.values.cluster_security_group_id),
+          aws_security_group.this.id
+        ]
+    }
+
+    ingress {
+        protocol        = "-1"
+        from_port       = 0
+        to_port         = 0
+        self            = true
+    }
+
+    egress {
+        from_port        = 0
+        to_port          = 0
+        protocol         = "-1"
+        cidr_blocks      = ["0.0.0.0/0"]
+    }
+}
+
+// Cloudwatch Dashboards
+
+
+
+// Cloudwatch Alarms
+
+  // Service unavailabile for > 10 minutes

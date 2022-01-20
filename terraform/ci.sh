@@ -2,12 +2,14 @@
 
 set -eou pipefail
 
-if [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "master" ]]; then
+
+if [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "develop" ]]; then
+    stage="develop"
+elif [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "master" ]]; then
     stage="live"
-elif [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
-    stage="${TRAVIS_BRANCH}"
 else
-    stage="${TRAVIS_PULL_REQUEST_BRANCH}" # The source branch
+    echo "Deployment not supported for this branch"
+    exit 0
 fi
 
 TF_WORKSPACE="library-db-${stage}"

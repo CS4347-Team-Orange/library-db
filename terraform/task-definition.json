@@ -27,6 +27,10 @@
           "containerPath": "/mnt/efs/",
           "sourceVolume": "${app_name}"
       }],
+      "healthCheck": {
+        "command": ["CMD-SHELL", "PGPASSWORD=${postgres_password} psql -U ${postgres_user} -d ${postgres_database} -c 'select book_id from book limit 1;'"],
+        "startPeriod": 300
+      },
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
