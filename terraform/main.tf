@@ -144,7 +144,8 @@ resource "random_password" "db_password" {
 resource "aws_security_group" "this" { 
     name                 = "${local.app_name}"
     description          = "Tier security group for ${local.app_name}"
-
+    vpc_id               = nonsensitive(data.tfe_outputs.account.values.vpc_id)
+    
     ingress {
         protocol        = "tcp"
         from_port       = 5432
