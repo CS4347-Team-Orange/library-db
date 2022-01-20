@@ -12,9 +12,10 @@ env:
 script:
 - export OLDPWD=$(pwd)
 - mkdir -p /tmp/tf-install
-- cd /tmp/tf-install && wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip
-  && unzip terraform_"$tf_version"_linux_amd64.zip && sudo mv terraform /usr/local/bin/
+- cd /tmp/tf-install && wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip && unzip terraform_"$tf_version"_linux_amd64.zip && sudo mv terraform /usr/local/bin/
 - cd ${OLDPWD} && rm -rf /tmp/tf-install
-- sudo apt-get -y install python3-pip
-- pip3 install awscli
+- curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+- unzip awscli-bundle.zip
+- ./awscli-bundle/install -b ~/bin/aws
+- export PATH=~/bin:$PATH'
 - bash travis.sh
