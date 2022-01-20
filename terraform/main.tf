@@ -101,7 +101,7 @@ resource "aws_ecs_task_definition" "this" {
   })
 
   volume {
-    name = "service-storage"
+    name = local.app_name
 
     efs_volume_configuration {
       file_system_id          = aws_efs_file_system.this.id
