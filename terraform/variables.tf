@@ -22,9 +22,11 @@ variable "tf_org" {
     type        = string
 }
 
+# https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
+
 variable "service_cpu" { 
     description = "The amount of CPU to allocate to the service (See AWS ECS Fargate Task Definition)"
-    default     = 1024
+    default     = 512
     type        = number
 }
 
