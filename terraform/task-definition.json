@@ -21,12 +21,12 @@
         {
             "name": "PGDATA",
             "value": "/mnt/efs/"
-        }    
+        }
       ],
-      "mountPoints": { 
+      "mountPoints": [{
           "containerPath": "/mnt/efs/",
           "sourceVolume": "${app_name}"
-      },
+      }],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
