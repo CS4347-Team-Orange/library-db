@@ -6,11 +6,8 @@ if [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "master" ]]; 
     stage="live"
 elif [[ "${TRAVIS_PULL_REQUEST}" == "false" ]]; then
     stage="${TRAVIS_BRANCH}"
-elif [[ "${TRAVIS_PULL_REQUEST}" == "true" ]]; then
+else
     stage="${TRAVIS_PULL_REQUEST_BRANCH}" # The source branch
-else 
-    echo "TRAVIS_PULL_REQUEST has unexpected value: ${TRAVIS_PULL_REQUEST}"
-    exit 1
 fi
 
 TF_WORKSPACE="library-db-${stage}"
