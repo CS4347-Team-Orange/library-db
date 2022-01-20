@@ -107,7 +107,6 @@ resource "aws_ecs_task_definition" "this" {
       file_system_id          = aws_efs_file_system.this.id
     }
   }
-
 }
 
 resource "aws_ecs_service" "main" {
@@ -139,7 +138,6 @@ resource "random_password" "db_password" {
   length           = 16
   special          = false
 }
-
 
 // Security Group
 
