@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# this script is run when the docker container is built
+# this script is run when the docker container is launched for the first time
 # it imports the base database structure and create the database for the tests
+# https://hub.docker.com/_/postgres
 
 DATABASE_NAME="library"
 DB_DUMP_LOCATIONS="/tmp/psql_data/schema.sql /tmp/psql_data/data.sql"

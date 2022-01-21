@@ -1,5 +1,27 @@
+os: linux
+dist: focal
 language: node_js
 node_js:
-  - 14
+- 14
+env:
+  global:
+  - tf_version=1.1.3
+  - TF_HOST=app.terraform.io
+  - TF_ORG=alex4108
+  # TF_API_TOKEN
+  - secure: HuW/bm6FHE6hLTjpHBhR/RhG4KGy2yGtcR+hKCpMDjw4O4JDHhSLHj+BXEgT0Fn4SX71ABgcWRrJMRosiqh+gzxGprgmlnUO6ebrLeYaKwDaoK6PHE+2By1xJKutIHZMWzfIDcLFgNMN3inpKUNMIuBsFvyKscH42+xJk3XfuiYFgaf4dk3VGLl87c0sMNfdTfd3hTsCCIz8Kg3WfkbeGFFrZgESHw7T+kKkDeRrqTk4mgxwC6yx7p6zmbh+VMpsKdPXKMoKuod2WJGPqAhl1197vOfD2wm3n6kb1cjl7Q2llezRxPEGuaDloMR49L79prrmHV+gsmChxYMl7zaoMopTRpxNeQFOpFi2MtlBEty+yi+aO8b7aqv26JBBRFjEsqunNxwtCwlG+cCaP36dgK2EKwkUE5deevBPbfP6Sl3KakLwKTR4QXNFFQzOcZ2xDCLSvqFvCC2FGht9B0+S2rmTPywH+Bx2wyWTZjlu5fsJ7AF7vuBlTVNSqJKcbDpsGDqRopXkUrxxzFqndg9mwckMaYdfNWDrI1djZ/my+gS5V360owXqFCYJNmX4utNEciLTOisZZ5hYFXgwxh/X42Zys+URcMU63R6aX79zJnJ1eIbbMOVP3CsTXJRY4//0W7USInIBeaUaNGMJIy9DXowReHu9IRCfmtYDPwo1f3Y=
+  # DOCKER_USER
+  - secure: dIKuHt1cRR/jW6JhWq+eOGvSvecQ41QB2B1WIq/jYSO0nxjsuzkKR/gwR30TJHC2U58V+VUc2NrU2eHEK9y910bfkRC6PE0i0jPRVWL14TUB2Q1VkTmtQlF1mNdk7YUpxlTtqOkR2bJi5Bjr90yLWlfG7C6nu361EFNFqImvCJwHp5GW93dugQvp48imlUzIk05NPTps3RiHYofPZXt01RaTjaUVwuObz+yIeOmRiw/QSo7FO8pFy3gsuxWnAbTrpKaNhzJEoK3/IK/mPDI75GJP6r7q01AFmjH1De88bDfD/z9dm26NRT89ImtwXNVLCA4j8vFuZ7ly2jOysRROKGTws65LlCW18rbLplHH+yU/inTrQDb7JTlZzyquLpjy1rWVdI0IzfsNxLW88nAoGys6n7z9Z8ys9tubVI1Vw0zEUfIY2/BLMumbG6UM1YrgU1n4h+9FsD/Jwi9QDeME7EA4qKfzKwUwL35cmWLYoGeMyuw4LyPvrKVZZ5ffPehyvHdL5S0v4iQHIbKQX47G0KU9UxhENV9pZOMM/OeWaTViBr9HgTDgNK5y6EKSXlB34f7uZxWX+20HzJL21M5AsBWpMsnWOMKzAWzL0wbgDDYj18/p5WIJ8L596sSRUP5N/6/Vvb/AxNBVL/QneQ6P+++l5phxXGrSJHw4oRvpKJY=
+  # DOCKER_PASS
+  - secure: "Su4xyOHXktHWN1LaAi27MgDi0KU+hVsGgKpnJR94nayi4RZ40AuEzBfmqBfFlhmaPm5Qdd9Mm3EuewvQ5EXZ6dUTG5diOw9ASe6m0AhaFbE6BOLHowalFNCBw7TuxqyAQXlPa9SCdBF+7ngUQrNEk9CTe6aXKaXYAXqFTcSXON6AlDwGfnGYbS0ze83UdIoLFMw3gkEr3bnu3UcE5+A6hTAQ0Nqd4iO/+S8gCdj03owuTzvXsR+rYt/8keUsYhPNNgooTO30KZzvE0kfiT6TAVrbDPaSxkEF0ly0pJhzLR9ImJh/H2P5qf01UpHKJUo4BGT0Syc1I6RMFp5I1Q7qrwJtS8wqd6baC/nkrowayu/GNL1BQT0c5jcxEelk69Ze3OqYvjjYeWdCc3B3ujvMUDngGWk87l6ZfUQyjo9wy5Bbci0Lf8kLlI0Ct/1rP1TaVKGIl/9IBabeHaWQjCfFCX1GFoNDxrMmtGGo/MNh0YfAFckAjvgKkwmA9JqAvaCHQbD3IAS+LNWU1hPnD6HegahCdI1uaTv42hRPrJ5UsLfcBfD0ZwbxBmf6kL8Ei22K00HFj5RuuN9amQGc2+XDobTqo6Ik4ZdRS2UqyIsOmBPmvy4ZNbFJT2uxcA8vHfEBno1iuMMQHboTkNaMHNY9oE8dJTt+S/UZrmaAobWdguY="
 script:
-      - bash travis.sh
+- export OLDPWD=$(pwd) &&
+  mkdir -p /tmp/tf-install &&
+  cd /tmp/tf-install && 
+  wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip && 
+  unzip terraform_"$tf_version"_linux_amd64.zip && 
+  sudo mv terraform /usr/local/bin/ &&
+  cd ${OLDPWD} && 
+  rm -rf /tmp/tf-install
+- pip3 install awscli
+- bash travis.sh
